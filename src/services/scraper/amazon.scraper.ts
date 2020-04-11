@@ -17,8 +17,6 @@ const amazonScraper = async (
 			`https://www.amazon.com/s?k=${q}+case&page=${setup.sitePage}&s=review-rank`
 		);
 
-		console.log(res);
-
 		const $ = cheerio.load(await res.text());
 
 		let items = $('div.s-result-list.s-search-results.sg-row').find(

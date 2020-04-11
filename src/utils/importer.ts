@@ -54,7 +54,6 @@ const importer = ({
 			done.add(filenameStem);
 		}
 	}
-	console.log(modules);
 
 	return modules;
 };
