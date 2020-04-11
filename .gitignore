@@ -1,13 +1,5 @@
 **/config.env
 
-/src/
-
-/.dockerignore
-
-/Dockerfile
-
-/nodemon.json
-
-/tsconfig.josn
+/dist/
 
 /node_modules/

@@ -7,8 +7,7 @@
 		"test": "test",
 		"start": "cross-env NODE_ENV=production node dist/index.js",
 		"dev": "nodemon src/index.ts",
-		"build": "tsc",
-		"build:assets": "copyfiles -u 1 \"./src/public/**\" \"src/config/**.env\" \"src/views/**\" \"./dist\""
+		"build": "tsc && copyfiles -u 1 \"./src/public/**\" \"src/config/**.env\" \"src/views/**\" \"./dist\""
 	},
 	"author": "Juan Romero (NovaJuan)",
 	"license": "MIT",
