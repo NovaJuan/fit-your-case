@@ -1,0 +1,86 @@
+<header class="header">
+  <div class="container">
+    <h1>Fit Your Case</h1>
+    <p>Find the right case for your phone or tablet</p>
+
+    <div class="search-bar">
+      <form id="search-bar" class="search-form" action="/" method="GET">
+        <p id="error" class="error"></p>
+        <div class="selection-bar">
+          <select id="make" name="make" class="select">
+            <option value="" disabled selected>Make</option>
+            <option value="Apple">Apple</option>
+            <option value="Samsung">Samsung</option>
+          </select>
+          <select id="model" name="model" class="select" disabled>
+            <option value="" disabled selected>Model</option>
+          </select>
+          <select id="version" name="version" class="select" disabled>
+            <option value="" disabled selected>Version</option>
+          </select>
+        </div>
+        <div class="btn-wrapper">
+          <button type="submit" class="submit-btn">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    {{#if isSearching}}
+    <div class="content">
+      {{#if items}}
+      {{#each items}}
+      <div class="item">
+        <div class="image-container">
+          <img src="{{this.photo}}" alt="">
+        </div>
+        <div class="item-info">
+          <img src="/img/{{this.site}}-logo.png" class="site-logo" alt="">
+          <h3 class="name">{{this.name}}</h3>
+          <p class="price">{{this.price}}</p>
+          <p class="score">{{this.score}}</p>
+          <a class="check-btn" href="{{this.link}}">Check it out</a>
+        </div>
+      </div>
+      {{/each}}
+      {{else}}
+      <div class="no-results">
+        <h3>No Cases found :(</h3>
+      </div>
+      {{/if}}
+
+    </div>
+    <div class="pagination">
+      {{#if pagination.prev}}
+      <div class="pag">
+        <a href="{{pagination.prev}}" class="prev">
+          <img src="/img/arrow.svg" alt="">
+        </a>
+      </div>
+      {{/if}}
+      <div class="pag">
+        <span>{{pagination.current}}</span>
+      </div>
+      {{#if pagination.next}}
+      <div class="pag">
+        <a href="{{pagination.next}}" class="next">
+          <img src="/img/arrow.svg" alt="">
+        </a>
+      </div>
+      {{/if}}
+    </div>
+    {{else}}
+    <div class="content">
+      <h3 class="welcome">Welcome, time to search your ideal case!</h3>
+    </div>
+    {{/if}}
+  </div>
+</main>
+<script>
+</script>
+<script src="/js/selection.js"></script>
