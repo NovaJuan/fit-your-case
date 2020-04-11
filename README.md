@@ -33,4 +33,5 @@ $ docker-compose up -d
 ![Website screenshot](./Screenshot.jpg)
 
 > Version: 1.0.0
+
 > Author: Juan Romero
