@@ -1,5 +1,6 @@
 # Fit Your Case Website
->Web scraping in Amazon using node-fetch and cheerio
+> Web scraping in Amazon using node-fetch and cheerio
+> #### FIRSTLY WILL LOAD SLOW, ONCE IS CACHED WILL BE FASTER
 
 ## Technologies
 - Node.js
