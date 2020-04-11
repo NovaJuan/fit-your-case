@@ -14,20 +14,23 @@
 
 ### Instructions
 1. Clone the repo
-  ´´´ bash
-  git clone 
-  ´´´
+```bash
+$ git clone https://github.com/NovaJuan/fit-your-case.git
+```
 
 2. Go to the project folder
-  ´´´ bash
-  cd fit-your-case 
-  ´´´
+```bash
+$ cd fit-your-case
+```  
 
 3. Use docker-compose
-  ´´´ bash
-  docker-compose up -d 
-  ´´´
+```bash
+$ docker-compose up -d 
+```
 
 4. Open browser at port **5000**
 
 ![Website screenshot](./Screenshot.jpg)
+
+> Version: 1.0.0
+> Author: Juan Romero
