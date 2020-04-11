@@ -2,4 +2,12 @@
 
 /src/
 
+/.dockerignore
+
+/Dockerfile
+
+/nodemon.json
+
+/tsconfig.josn
+
 /node_modules/
