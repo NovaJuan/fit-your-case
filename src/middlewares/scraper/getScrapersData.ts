@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import scraper from '../../services/scraper';
 import client from '../../config/redis_db';
+import { fork } from 'child_process';
+import * as path from 'path';
 
 const getScrapersData = async (
 	req: Request,
@@ -18,33 +19,35 @@ const getScrapersData = async (
 		return next();
 	}
 
-	const data = await scraper(query, page);
+	const scraperProcess = fork(path.join(__dirname, '../../services/scraper'));
+	scraperProcess.send({ query, page });
+	scraperProcess.on('message', (data: any) => {
+		// Setting pagination
+		const pagination = { current: page, prev: '', next: '' };
 
-	// Setting pagination
-	const pagination = { current: page, prev: '', next: '' };
+		//Previous link------
+		if (page > 1) {
+			pagination.prev =
+				req.url.replace(`&page=${page}`, ``) + `&page=${page - 1}`;
+		}
 
-	//Previous link------
-	if (page > 1) {
-		pagination.prev =
-			req.url.replace(`&page=${page}`, ``) + `&page=${page - 1}`;
-	}
+		//Next Link--------
+		if (data.totalItems >= 5) {
+			pagination.next =
+				req.url.replace(`&page=${page}`, ``) + `&page=${page + 1}`;
+		}
 
-	//Next Link--------
-	if (data.totalItems >= 5) {
-		pagination.next =
-			req.url.replace(`&page=${page}`, ``) + `&page=${page + 1}`;
-	}
+		data['pagination'] = pagination;
 
-	data['pagination'] = pagination;
+		// Set state to isSearching = true;
+		data['isSearching'] = true;
 
-	// Set state to isSearching = true;
-	data['isSearching'] = true;
+		req['scrapers_data'] = data;
 
-	req['scrapers_data'] = data;
+		client.setex(`${query}|${page}`, 60 * 60, JSON.stringify(data));
 
-	client.setex(`${query}|${page}`, 60 * 60, JSON.stringify(data));
-
-	next();
+		next();
+	});
 };
 
 export default getScrapersData;

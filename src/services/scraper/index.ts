@@ -20,6 +20,12 @@ export interface ScraperResults {
 	site: string;
 }
 
+process.on('message', async (message) => {
+	const data = await scraper(message.query, message.page);
+	process.send(data);
+	process.exit();
+});
+
 const scraper = async (query: string, page: number = 1) => {
 	const data: ScraperResults[] = await Promise.all(
 		scrapers.map(
